@@ -110,14 +110,32 @@
 				</section>
 
         <section>
+        <h2>Asynchronous</h2>
+        <p>Vert.x provides APIs for TCP/HTTP/HTTPS/Websocket clients and servers.
+        as well as a <strong>distributed event bus</strong>, timers, file system
+        operations, and more.
+        </p>
+        </section>
+
+        <section>
 					<h2>Some Code</h2>
 					<pre><code data-trim contenteditable>
 
+# Requiring 'vertx' pulls in everything
+var vertx  = require('vertx');
+
+# And hangs most of it off of a global 'vertx' object
 var server = vertx.createHttpServer();
 
+# Handle incoming HTTP requests
 server.requestHandler(function(req) {
-      request.response.statusCode(779).statusMessage("Too many gerbils").end();       
-}).listen(8080, "localhost");
+      request.response.statusCode(779)
+      request.response.statusMessage("Too many gerbils")
+      request.response.write("Off by too many to count error").end();
+});
+
+# Start the server
+server.listen(8080, "localhost");
 
 					</code></pre>
 				</section>
@@ -126,6 +144,7 @@ server.requestHandler(function(req) {
 					<h2>Even More Code</h2>
 					<pre><code data-trim contenteditable>
 
+# You can also require modules piecemeal
 var container = require('vertx/container');
 
 var config = {
@@ -133,18 +152,14 @@ var config = {
   "port": 8080
 };
 
+# You can deploy modules programatically and
+# Vert.x will find, find, download and install them for you
+# at runtime. This is the source code for the presentation
+# I'm giving right now.
 container.deployModule("io.vertx~mod-web-server~2.0.0-final", config);
 
 					</code></pre>
 				</section>
-
-        <section>
-        <h2>Asynchronous</h2>
-        <p>Vert.x provides APIs for TCP/HTTP/HTTPS/Websocket clients and servers.
-        as well as a <strong>distributed event bus</strong>, timers, file system
-        operations, and more.
-        </p>
-        </section>
 			</div>
 
 		</div>
