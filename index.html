@@ -76,24 +76,37 @@
           </section>
           <section>
           <h2>JVM</h2>
-            <h3>Polyglot</h3>
-            <p>
-            Each language has an API similar to the core Java API, but exposed
-            with language-specific semantics
-            </p>
-            <h4 class="fragment roll-in">Java, JRuby, Jython, Javascript, Groovy, Scala, Clojure</h4>
-            <p class="fragment roll-in">
-            Language APIs are Vert.x modules just like anything else outside of
-            the core Java API.  
-            </p>
+            <h3 class="fragment roll-in">Polyglot</h3>
+            <p class="fragment roll-in">Java, JRuby, Jython, Javascript, Groovy, Scala, Clojure</p>
+          </section>
+          <section>
+          <h2>Polyglot</h2>
+          <p class="fragment roll-in">
+          Each language has an API similar to the core Java API, but exposed
+          with language-specific semantics
+          </p>
+          </section>
+          <section>
+          <h2>Polyglot</h2>
+          <p>
+          Language APIs are Vert.x modules just like anything else outside of
+          the core Java API.  
+          </p>
           </section>
 				  <section>
           <h2>Modern Mobile Enterprise</h2>
-          <p class="fragment roll-in">
+          <blockquote class="fragment roll-in">
+            ...for modern mobile, web, and enterprise applications
+          </blockquote>
+          </section>
+				  <section>
+          <h2>Modern Mobile Enterprise</h2>
+          <p>
             <img src="http://farm4.staticflickr.com/3274/3119439609_9945dcf010_o.png" title="Rainbows and Unicorns" alt="Rainbows and Unicorns"/>
             <div style="font-size:small">
               &copy; Totally Severe http://www.flickr.com/photos/29364131@N07/
             </div>
+            Umm, OK.
           </p>
           </section>
           <section/>
@@ -118,6 +131,13 @@
         </section>
 
         <section>
+        <h2>Asynchronous</h2>
+        <h3>Back to Work!</h3>
+        <img src="http://images3.static-bluray.com/reviews/1017_4.jpg" alt="Back to Work"/>
+        <p class="fragment roll-in">~ 500k requests/second</p>
+        </section>
+
+        <section>
 					<h2>Some Code</h2>
 					<pre><code data-trim contenteditable>
 
@@ -128,7 +148,7 @@ var vertx  = require('vertx');
 var server = vertx.createHttpServer();
 
 # Handle incoming HTTP requests
-server.requestHandler(function(req) {
+server.requestHandler(function(request) {
       request.response.statusCode(779)
       request.response.statusMessage("Too many gerbils")
       request.response.write("Off by too many to count error").end();
@@ -160,6 +180,30 @@ container.deployModule("io.vertx~mod-web-server~2.0.0-final", config);
 
 					</code></pre>
 				</section>
+        <section>
+					<h2>JRuby</h2>
+					<pre><code data-trim contenteditable>
+
+container = Vertx::Container
+
+config = {
+  "web_root": ".",
+  "port": 8080
+};
+
+container.deploy_module("io.vertx~mod-web-server~2.0.0-final", config);
+
+					</code></pre>
+				</section>
+				<section>
+          <h2>Try it at home!</h2>
+					<pre><code data-trim contenteditable>
+$ git clone https://github.com/lance/dataIO2013.git
+$ cd dataIO2013
+$ vertx run preso.js
+					</code></pre>
+
+				</section>
 			</div>
 
 		</div>
@@ -178,7 +222,7 @@ container.deployModule("io.vertx~mod-web-server~2.0.0-final", config);
 				center: true,
 
 				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+				transition: Reveal.getQueryHash().transition || 'none', // default/cube/page/concave/zoom/linear/fade/none
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
