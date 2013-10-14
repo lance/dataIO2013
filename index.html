@@ -54,49 +54,80 @@
           <a href="http://vertx.io" class="fragment">http://vertx.io</a>
         </section>
 
-				<section>
-          <section>
-          <h2>What Does That <em>Mean?</em></h2>
-          <p class="fragment roll-in">Small</p>
-          <p class="fragment roll-in">Fast</p>
-          <p class="fragment roll-in">Buzzwordy</p>
-          </section>
+        <section>
+        <h2>What Does That <em>Mean?</em></h2>
+        <p class="fragment roll-in">Small</p>
+        <p class="fragment roll-in">Fast</p>
+        <p class="fragment roll-in">Buzzwordy</p>
+        </section>
 
-          <section>
-          <h2>Lightweight</h2>
-            <p class="fragment roll-in">&lt; 5MB Download Size</p>
-            <p class="fragment roll-in">Embeddable</p>
-            <p class="fragment roll-in">Modular</p>
-          </section>
-          <section>
-          <h2>High Performance</h2>
-            <p class="fragment roll-in">Asynchronous Framework</p>
-            <p class="fragment roll-in">Built on Netty</p>
-            <p class="fragment roll-in">Hundreds of thousands of responses per second</p>
+        <section>
+        <h2>Lightweight</h2>
+          <blockquote cite="http://vertx.io">
+            &ldquo;Vert.x is a <strong>lightweight</strong>, high performance
+            application platform for the JVM...&rdquo; </blockquote>
+          <p class="fragment roll-in">&lt; 5MB Download Size</p>
+          <p class="fragment roll-in">Embeddable</p>
+          <p class="fragment roll-in">Modular</p>
+        </section>
+
+        <section>
+        <h2>High Performance</h2>
+          <blockquote cite="http://vertx.io">
+            &ldquo;Vert.x is a lightweight, <strong>high performance</strong>
+            application platform for the JVM...&rdquo; </blockquote>
+          <p class="fragment roll-in">Hundreds of thousands of responses per second</p>
+          <p class="fragment roll-in">Built on Netty | <a href="http://netty.io">netty.io</a></p>
+          <p class="fragment roll-in">Asynchronous Framework</p>
+        </section>
+
+        <section>
+          <h2>Asynchronous</h2>
+          <h3>Back to Work!</h3>
+          <img src="http://images3.static-bluray.com/reviews/1017_4.jpg" alt="Back to Work"/>
+          <p class="fragment roll-in">~ 500k requests/second</p>
+        </section>
+
+        <section>
+          <h2>Asynchronous</h2>
+          <p>Vert.x provides APIs for TCP/HTTP/HTTPS/Websocket clients and servers.
+          as well as a distributed event bus, timers, file system operations, and more.
+          </p>
+          <p class="fragment roll-in">~ 500k requests/second</p>
+        </section>
+
           </section>
           <section>
           <h2>JVM</h2>
-            <h3 class="fragment roll-in">Polyglot</h3>
-            <p class="fragment roll-in">Java, JRuby, Jython, Javascript, Groovy, Scala, Clojure</p>
+          <blockquote cite="http://vertx.io">
+              &ldquo;Vert.x is a lightweight, high performance
+              application platform for the <strong>JVM</strong>...&rdquo; </blockquote>
+          <p>Java, JRuby, Jython, Javascript, Groovy, Scala, Clojure</p>
+          <p class="fragment roll-in">Ploygasm</p>
           </section>
           <section>
-          <h2>Polyglot</h2>
-          <p class="fragment roll-in">
+          <h2>JVM</h2>
+          <blockquote cite="http://vertx.io">
+              &ldquo;Vert.x is a lightweight, high performance
+              application platform for the <strong>JVM</strong>...&rdquo; </blockquote>
+          <p>
           Each language has an API similar to the core Java API, but exposed
           with language-specific semantics
           </p>
           </section>
           <section>
-          <h2>Polyglot</h2>
+          <h2>JVM</h2>
+          <blockquote cite="http://vertx.io">
+              &ldquo;Vert.x is a lightweight, high performance
+              application platform for the <strong>JVM</strong>...&rdquo; </blockquote>
           <p>
-          Language APIs are Vert.x modules just like anything else outside of
-          the core Java API.  
+          Language APIs are Vert.x modules just like anything else outside of the core Java API
           </p>
           </section>
 				  <section>
           <h2>Modern Mobile Enterprise</h2>
-          <blockquote class="fragment roll-in">
-            ...for modern mobile, web, and enterprise applications
+          <blockquote site="http://vertx.io">
+            ...for <strong>modern mobile</strong>, web, and <strong>enterprise</strong> applications
           </blockquote>
           </section>
 				  <section>
@@ -112,8 +143,10 @@
           <section/>
           <h2>Modern Mobile Enterprise</h2>
             <p class="fragment">Thread Safe</p>
+            <p class="fragment">Asynchronous/Reactive</p>
+            <p class="fragment">Client Push</p>
             <p class="fragment"><strike>Node.js</strike></li>
-            <p class="fragment">Flying Unicorns</p>
+            <p class="fragment">Flying Rainbow Unicorns</p>
           </section>
 					<aside class="notes">
             Oh hey, these are some notes. They'll be hidden in your
@@ -123,87 +156,322 @@
 				</section>
 
         <section>
-        <h2>Asynchronous</h2>
-        <p>Vert.x provides APIs for TCP/HTTP/HTTPS/Websocket clients and servers.
-        as well as a <strong>distributed event bus</strong>, timers, file system
-        operations, and more.
-        </p>
-        </section>
-
-        <section>
-        <h2>Asynchronous</h2>
-        <h3>Back to Work!</h3>
-        <img src="http://images3.static-bluray.com/reviews/1017_4.jpg" alt="Back to Work"/>
-        <p class="fragment roll-in">~ 500k requests/second</p>
-        </section>
-
-        <section>
 					<h2>Some Code</h2>
 					<pre><code data-trim contenteditable>
 
-# Requiring 'vertx' pulls in everything
-var vertx  = require('vertx');
-
-# And hangs most of it off of a global 'vertx' object
-var server = vertx.createHttpServer();
-
-# Handle incoming HTTP requests
-server.requestHandler(function(request) {
-      request.response.statusCode(779)
-      request.response.statusMessage("Too many gerbils")
-      request.response.write("Off by too many to count error").end();
-});
-
-# Start the server
-server.listen(8080, "localhost");
-
-					</code></pre>
-				</section>
-
-        <section>
-					<h2>Even More Code</h2>
-					<pre><code data-trim contenteditable>
-
-# You can also require modules piecemeal
+# You can require API modules piecemeal
 var container = require('vertx/container');
+
+# Or you can pull everything in at once
+# var vertx = require('vertx');
+# var container = vertx.container;
 
 var config = {
   "web_root": ".",
   "port": 8080
 };
 
-# You can deploy modules programatically and
-# Vert.x will find, find, download and install them for you
-# at runtime. This is the source code for the presentation
-# I'm giving right now.
+# With vertx-platform you can deploy modules programatically and # Vert.x will
+# find, find, download and install them for you # at runtime. This is the source
+# code for the presentation # I'm giving right now.
 container.deployModule("io.vertx~mod-web-server~2.0.0-final", config);
 
 					</code></pre>
+          <p class="fragment">
+          This is the <em>Verticle</em> that serving up this presentation.
 				</section>
+
+        <section>
+					<h2>Even More Code (Java)</h2>
+					<pre><code data-trim contenteditable>
+
+// The vertx object is inherited from our superclass
+HttpServer server = vertx.createHttpServer();
+
+server.requestHandler(new Handler< HttpServerRequest >() {
+    public void handle(HttpServerRequest request) {
+        request.response().setStatusCode(779);
+        request.response().setStatusMessage("Too many gerbils");
+        request.response().write("Off by too many to count error").end();
+    }
+});
+
+server.listen(8080, "localhost");
+
+					</code></pre>
+				</section>
+
+        <section>
+					<h2>Javascript</h2>
+					<pre><code data-trim contenteditable>
+
+// Requiring 'vertx' pulls in everything
+var vertx  = require('vertx');
+
+// And hangs most of it off of a global 'vertx' object
+var server = vertx.createHttpServer();
+
+// Handle incoming HTTP requests
+server.requestHandler(function(request) {
+      request.response.statusCode(779)
+      request.response.statusMessage("Too many gerbils")
+      request.response.write("Off by too many to count error").end();
+});
+
+// Start the server
+server.listen(8080, "localhost");
+
+					</code></pre>
+				</section>
+
+        <section>
+					<h2>Clojure</h2>
+					<pre><code data-trim contenteditable>
+(ns demo.verticle
+  (:require [vertx.http :as http]
+            [vertx.stream :as stream]))
+ 
+(defn req-handler [req]
+  (println "Headers are:" (pr-str (http/headers req)))
+  (-> (http/server-response req {:status-code 779, :status-message "Too many gerbils"})
+      (stream/write "Off by too many to count error")
+      (http/end)))
+ 
+(-> (http/server)
+    (http/on-request req-handler)
+    (http/listen 8080))
+					</code></pre>
+				</section>
+
         <section>
 					<h2>JRuby</h2>
 					<pre><code data-trim contenteditable>
+require "vertx"
+include Vertx
 
-container = Vertx::Container
+server = Vertx::HttpServer.new
 
-config = {
-  "web_root": ".",
-  "port": 8080
-};
+// Handle incoming HTTP requests
+server.request_handler do |request|
+      request.response.status_code  = 779
+      request.response.status_message = "Too many gerbils"
+      request.response.write("Off by too many to count error").end;
+end
 
-container.deploy_module("io.vertx~mod-web-server~2.0.0-final", config);
-
+// Start the server
+server.listen(8080, "localhost")
 					</code></pre>
 				</section>
-				<section>
-          <h2>Try it at home!</h2>
+
+        <section>
+          <h2>Verticle</h2>
+          <p>A <em>Verticle</em> is the package of code that Vert.x runs.</p>
+					<pre class="fragment"><code data-trim contenteditable>
+$ vertx run app.js -conf config.json -instances 3
+          </code></pre>
+          <aside class="notes">
+          Verticles can be written in JavaScript, Ruby, Java, Groovy or Python
+          (Scala and Clojure support is in the pipeline).  Many verticles can
+          be executing concurrently in the same Vert.x instance.  An
+          application might be composed of multiple verticles deployed on
+          different nodes of your network communicating by exchanging messages
+          over the Vert.x event bus.
+          </aside>
+        </section>
+
+        <section>
+          <h2>Verticle</h2>
+          <p>Verticles can be deployed programatically too.</p>
 					<pre><code data-trim contenteditable>
-$ git clone https://github.com/lance/dataIO2013.git
-$ cd dataIO2013
-$ vertx run preso.js
-					</code></pre>
+# Deploying a Clojure verticle from JRuby!
+vertx.deploy_verticle('broker.clj') do |err, deployment_id|
+  puts 'deploy successful!' unless err
+end
+          </code></pre>
+        </section>
 
-				</section>
+        <section>
+          <h2>Verticle</h2>
+          <p class="fragment">Verticles are assigned to an event loop</p>
+          <p class="fragment">Event loops are assigned to a thread</p>
+          <p class="fragment">Threads are assigned to a processor core</p>
+          <p class="fragment">Threads safety without compromising cores</p>
+          <aside class="notes">
+          Verticles are assigned to an event loop
+          Event loops are assigned to a thread
+          Threads are assigned to a processor core
+          Threads safety without compromising cores
+          </aside>
+        </section>
+
+        <section data-background="#dd3333">
+          <h2>Event Loop</h2>
+          <h3>DON'T BLOCK THE EVENT LOOP</h3>
+        </section>
+
+        <section data-background="#dd3333">
+          <h2>Event Loop</h2>
+          <ul>
+            <li class="fragment"><code>Thread.sleep() Object.wait() CountdownLatch.await() etc..</code></li>
+            <li class="fragment"><code>while(true) {console.log("Super Awesome");}</code></li>
+            <li class="fragment">Calculating the <em>Nth</em> digit of &Pi;</li>
+            <li class="fragment"><code>SELECT DISTINCT t1.*, t2.*, t3.* FROM products t1, prices t2, sizes t3 WHERE t1.name LIKE '%bacon%'</code></li>
+          </ul>
+        </section>
+
+        <section data-background="#33dd33">
+          <h2>Event Loop</h2>
+					<pre><code data-trim contenteditable>
+var fs = require('vertx/file_system');
+
+fs.open('/etc/passwd', function(buffer) {
+  // commit evil
+  // It's OK, as long as you DON'T BLOCK THE EVENT LOOP!
+});
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Worker Verticles</h2>
+          <img src="http://farm4.staticflickr.com/3826/9645884201_57bed23cd6_b.jpg" alt="Workers" title="Workers"/>
+          <div style="font-size:small">&copy; http://www.flickr.com/photos/stavos52093/9645884201</div>
+        </section>
+
+        <section>
+          <h2>Worker Verticles</h2>
+          <ul>
+            <li>Run on the event loop</li>
+            <li>Only ever running on a single thread</li>
+            <li>Can block!</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Modules</h2>
+          <p>The unit of deployment in Vert.x.  Modules can contain
+          multiple verticles, potentially written in different languages.
+          </p>
+          <p>More on this later...</p>
+
+        </section>
+
+        <section>
+          <h2>API Highlights</h2>
+          <h3>Container</h3>
+          <pre data-trim content-editable><code>
+var container = require('vertx/container');
+
+container.deployModule("io.vertx~mod-web-server~2.0.0-final", config);
+container.deployWorkerVerticle("databaseCruncher.rb", config);
+container.deployVerticle("app.py", config);
+          </code></pre>
+          </ul>
+        </section>
+
+        <section>
+          <h2>API Highlights</h2>
+          <h3>File System</h3>
+          <pre data-trim content-editable><code>
+var fs = require('vertx/file_system');
+
+fs.open('/etc/passwd', function(buffer) {
+  // commit evil
+  // It's OK, as long as you DON'T BLOCK THE EVENT LOOP!
+});
+          </code></pre>
+          </ul>
+        </section>
+
+        <section>
+          <h2>API Highlights</h2>
+          <h3>HTTP/Net/SSL</h3>
+          <pre data-trim content-editable><code>
+var http   = require('vertx/http');
+var net    = require('vertx/net');
+var server = http.createHttpServer();
+
+server.requestHandler(function(request) {
+  request.response.write("Hello from Vert.x!").end();
+}).listen(8080, "localhost");
+
+var client = http.createNetClient().connect(8080, function(socket) {
+  socket.write("GET / HTTP/1.1\n");
+  // etc..
+});
+          </code></pre>
+          </ul>
+        </section>
+
+        <section>
+          <h2>API Highlights</h2>
+          <h3>Timers</h3>
+          <pre data-trim content-editable><code>
+var timer = require('vertx/timer');
+var console = require('vertx/console');
+
+var id = timer.setTimer(5000, function() {
+  console.log("I'm 5 seconds in the future!");
+});
+
+timer.setPeriodic(2000, function() {
+  console.log("I SHOUT EVERY 2 SECONDS!");
+});
+
+console.log("Attention, here comes the loudmouth");
+timer.cancelTimer(id);
+          </code></pre>
+          </ul>
+        </section>
+
+        <section>
+          <h2>API Highlights</h2>
+          <h3>Event Bus</h3>
+          <pre data-trim content-editable><code>
+var bus = require('vertx/event_bus');
+var console = require('vertx/console');
+
+bus.registerHandler('app.messages', function(msg, reply) {
+  reply("Echoing: " + msg);
+});
+
+bus.send('app.messages', 'Hello!', function(reply) {
+  console.log('Got echo: ' + reply);
+});
+          </code></pre>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Event Bus</h2>
+          <ul>
+            <li>Message passing between components</li>
+            <li>Scalars &amp; JSON</li>
+            <li>Inter/intra verticle/cluster nodes</li>
+            <li>Point-to-point</li>
+            <li>Request/respond</li>
+            <li>Broadcast</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>API Highlights</h2>
+          <h3>Event Bus!!!</h3>
+          <pre data-trim content-editable><code>
+var eb = new vertx.EventBus('http://localhost:8080/eventbus');
+
+eb.onopen = function() {
+  eb.registerHandler('app.messages', function(message) {
+    console.log('Got a message in the browser! ' 
+                + JSON.stringify(message);
+  });
+
+  eb.send('app.messages', 
+          {type: 'corn chip', flavor: 'nacho cheese', count: 31417});
+}
+          </code></pre>
+          </ul>
+        </section>
+
 			</div>
 
 		</div>

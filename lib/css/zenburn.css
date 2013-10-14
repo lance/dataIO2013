@@ -11,6 +11,10 @@ pre code {
   color: #DCDCDC;
 }
 
+.reveal pre code {
+  padding: 20px;
+}
+
 pre .keyword,
 pre .tag,
 pre .django .tag,
