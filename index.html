@@ -37,7 +37,7 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-        <h1>Vert.x</h1>
+          <h1>Vert.x</h1>
 					<h3>Async Data From Cluster to Browser</h3>
           <p>
             <a href="http://lanceball.com">Lance Ball</a> / <a href="http://twitter.com/lanceball">@lanceball</a></small>
@@ -55,27 +55,29 @@
         </section>
 
         <section>
-        <h2>What Does That <em>Mean?</em></h2>
-        <p class="fragment roll-in">Small</p>
-        <p class="fragment roll-in">Fast</p>
-        <p class="fragment roll-in">Buzzwordy</p>
+          <h2>What Does That <em>Mean?</em></h2>
+          <p class="fragment roll-in">Small</p>
+          <p class="fragment roll-in">Fast</p>
+          <p class="fragment roll-in">Buzzwordy</p>
         </section>
 
         <section>
-        <h2>Lightweight</h2>
+          <h2>Lightweight</h2>
           <blockquote cite="http://vertx.io">
             &ldquo;Vert.x is a <strong>lightweight</strong>, high performance
-            application platform for the JVM...&rdquo; </blockquote>
+            application platform for the JVM...&rdquo; 
+          </blockquote>
           <p class="fragment roll-in">&lt; 5MB Download Size</p>
           <p class="fragment roll-in">Embeddable</p>
           <p class="fragment roll-in">Modular</p>
         </section>
 
         <section>
-        <h2>High Performance</h2>
+          <h2>High Performance</h2>
           <blockquote cite="http://vertx.io">
             &ldquo;Vert.x is a lightweight, <strong>high performance</strong>
-            application platform for the JVM...&rdquo; </blockquote>
+            application platform for the JVM...&rdquo; 
+          </blockquote>
           <p class="fragment roll-in">Hundreds of thousands of responses per second</p>
           <p class="fragment roll-in">Built on Netty | <a href="http://netty.io">netty.io</a></p>
           <p class="fragment roll-in">Asynchronous Framework</p>
@@ -96,41 +98,56 @@
           <p class="fragment roll-in">~ 500k requests/second</p>
         </section>
 
-          </section>
-          <section>
+        <section>
           <h2>JVM</h2>
           <blockquote cite="http://vertx.io">
               &ldquo;Vert.x is a lightweight, high performance
-              application platform for the <strong>JVM</strong>...&rdquo; </blockquote>
-          <p>Java, JRuby, Jython, Javascript, Groovy, Scala, Clojure</p>
+              application platform for the <strong>JVM</strong>...&rdquo; 
+          </blockquote>
+          <p>
+            <blockquote>
+            There was a time when every new train engine was accompanied by its
+            own rail gauge.  Eventually, having all trains able to run on all
+            track was more important.  
+            </blockquote>
+            <div style="font-size:small">
+              Robb Greathouse, Red Hat
+            </div>
+          </p>
+          <p class="fragment roll-in">Java, JRuby, Jython, Javascript, Groovy, Scala, Clojure</p>
           <p class="fragment roll-in">Ploygasm</p>
-          </section>
-          <section>
+        </section>
+
+        <section>
           <h2>JVM</h2>
           <blockquote cite="http://vertx.io">
               &ldquo;Vert.x is a lightweight, high performance
-              application platform for the <strong>JVM</strong>...&rdquo; </blockquote>
+              application platform for the <strong>JVM</strong>...&rdquo; 
+          </blockquote>
           <p>
           Each language has an API similar to the core Java API, but exposed
           with language-specific semantics
           </p>
-          </section>
-          <section>
+        </section>
+
+        <section>
           <h2>JVM</h2>
           <blockquote cite="http://vertx.io">
               &ldquo;Vert.x is a lightweight, high performance
-              application platform for the <strong>JVM</strong>...&rdquo; </blockquote>
+              application platform for the <strong>JVM</strong>...&rdquo; 
+          </blockquote>
           <p>
           Language APIs are Vert.x modules just like anything else outside of the core Java API
           </p>
-          </section>
-				  <section>
+        </section>
+				<section>
           <h2>Modern Mobile Enterprise</h2>
           <blockquote site="http://vertx.io">
             ...for <strong>modern mobile</strong>, web, and <strong>enterprise</strong> applications
           </blockquote>
-          </section>
-				  <section>
+        </section>
+
+        <section>
           <h2>Modern Mobile Enterprise</h2>
           <p>
             <img src="http://farm4.staticflickr.com/3274/3119439609_9945dcf010_o.png" title="Rainbows and Unicorns" alt="Rainbows and Unicorns"/>
@@ -139,14 +156,14 @@
             </div>
             Umm, OK.
           </p>
-          </section>
-          <section/>
+        </section>
+        <section>
           <h2>Modern Mobile Enterprise</h2>
-            <p class="fragment">Thread Safe</p>
-            <p class="fragment">Asynchronous/Reactive</p>
-            <p class="fragment">Client Push</p>
-            <p class="fragment"><strike>Node.js</strike></li>
-            <p class="fragment">Flying Rainbow Unicorns</p>
+          <p class="fragment">Thread Safe</p>
+          <p class="fragment">Asynchronous/Reactive</p>
+          <p class="fragment">Client Push</p>
+          <p class="fragment"><strike>Node.js</strike></li>
+          <p class="fragment">Flying Rainbow Unicorns</p>
           </section>
 					<aside class="notes">
             Oh hey, these are some notes. They'll be hidden in your
@@ -351,8 +368,6 @@ fs.open('/etc/passwd', function(buffer) {
           <p>The unit of deployment in Vert.x.  Modules can contain
           multiple verticles, potentially written in different languages.
           </p>
-          <p>More on this later...</p>
-
         </section>
 
         <section>
@@ -363,7 +378,7 @@ var container = require('vertx/container');
 
 container.deployModule("io.vertx~mod-web-server~2.0.0-final", config);
 container.deployWorkerVerticle("databaseCruncher.rb", config);
-container.deployVerticle("app.py", config);
+container.deployVerticle("app.clj", config);
           </code></pre>
           </ul>
         </section>
@@ -434,9 +449,12 @@ bus.registerHandler('app.messages', function(msg, reply) {
   reply("Echoing: " + msg);
 });
 
-bus.send('app.messages', 'Hello!', function(reply) {
+bus.send('app.messages', 'Hey You!', function(reply) {
   console.log('Got echo: ' + reply);
 });
+
+// send a message to everyone!
+bus.publish('app.messages', 'Hey Everybody!');
           </code></pre>
           </ul>
         </section>
