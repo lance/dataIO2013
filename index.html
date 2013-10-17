@@ -15,10 +15,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 		<link rel="stylesheet" href="css/reveal.min.css">
-		<link rel="stylesheet" href="css/theme/serif.css" id="theme">
+		<link rel="stylesheet" href="css/theme/simple.css" id="theme">
 
 		<!-- For syntax highlighting -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+		<link rel="stylesheet" href="lib/css/github.css">
 
 		<!-- If the query includes 'print-pdf', use the PDF print sheet -->
 		<script>
@@ -80,7 +80,6 @@
           </blockquote>
           <p class="fragment roll-in">Hundreds of thousands of responses per second</p>
           <p class="fragment roll-in">Built on Netty | <a href="http://netty.io">netty.io</a></p>
-          <p class="fragment roll-in">Asynchronous Framework</p>
         </section>
 
         <section>
@@ -91,11 +90,14 @@
         </section>
 
         <section>
-          <h2>Asynchronous</h2>
-          <p>Vert.x provides APIs for TCP/HTTP/HTTPS/Websocket clients and servers.
-          as well as a distributed event bus, timers, file system operations, and more.
-          </p>
-          <p class="fragment roll-in">~ 500k requests/second</p>
+          <h2>Asynchronous API</h2>
+          <ul>
+            <li>TCP / HTTP / HTTPS</li>
+            <li>File System Operations</li>
+            <li>SockJS Clients &amp; Servers</li>
+            <li>Event Bus</li>
+            <li>Coming Soon: UDP &amp; DNS</li>
+          </ul>
         </section>
 
         <section>
@@ -104,17 +106,29 @@
               &ldquo;Vert.x is a lightweight, high performance
               application platform for the <strong>JVM</strong>...&rdquo; 
           </blockquote>
-          <p>
-            <blockquote>
+          <br/>
+          <div class="fragment">
+            <p>
             There was a time when every new train engine was accompanied by its
-            own rail gauge.  Eventually, having all trains able to run on all
-            track was more important.  
-            </blockquote>
-            <div style="font-size:small">
-              Robb Greathouse, Red Hat
-            </div>
-          </p>
-          <p class="fragment roll-in">Java, JRuby, Jython, Javascript, Groovy, Scala, Clojure</p>
+            own rail gauge.  
+            </p>
+            <p>
+            Eventually, having all trains able to run on all track was more
+            important.  
+            </p>
+            <span style="font-size:small">
+              -- Robb Greathouse, Red Hat
+            </span>
+          </div>
+        </section>
+
+        <section>
+          <h2>JVM</h2>
+          <blockquote cite="http://vertx.io">
+              &ldquo;Vert.x is a lightweight, high performance
+              application platform for the <strong>JVM</strong>...&rdquo; 
+          </blockquote>
+          <p>Java, JRuby, Jython, Javascript, Groovy, Scala, Clojure</p>
           <p class="fragment roll-in">Polygasm</p>
         </section>
 
@@ -216,7 +230,7 @@ server.listen(8080, "localhost");
 
         <section>
 					<h2>Javascript</h2>
-					<pre><code data-trim contenteditable>
+					<pre><code data-trim contenteditable class="javascript">
 
 // Requiring 'vertx' pulls in everything
 var vertx  = require('vertx');
@@ -245,7 +259,6 @@ server.listen(8080, "localhost");
             [vertx.stream :as stream]))
  
 (defn req-handler [req]
-  (println "Headers are:" (pr-str (http/headers req)))
   (-> (http/server-response req {:status-code 779, :status-message "Too many gerbils"})
       (stream/write "Off by too many to count error")
       (http/end)))
@@ -336,7 +349,7 @@ end
 
         <section data-background="#33dd33">
           <h2>Event Loop</h2>
-					<pre><code data-trim contenteditable>
+					<pre><code data-trim contenteditable class="javascript">
 var fs = require('vertx/file_system');
 
 fs.open('/etc/passwd', function(buffer) {
@@ -355,8 +368,9 @@ fs.open('/etc/passwd', function(buffer) {
         <section>
           <h2>Worker Verticles</h2>
           <ul>
-            <li>Run on the event loop</li>
+            <li>Do not run on the event loop</li>
             <li>Only ever running on a single thread</li>
+            <li>But not always the same thread</li>
             <li>Can block!</li>
           </ul>
         </section>
@@ -371,7 +385,7 @@ fs.open('/etc/passwd', function(buffer) {
         <section>
           <h2>API Highlights</h2>
           <h3>Container</h3>
-          <pre data-trim content-editable><code>
+          <pre data-trim content-editable><code class="javascript">
 var container = require('vertx/container');
 
 container.deployModule("io.vertx~mod-web-server~2.0.0-final", config);
@@ -384,7 +398,7 @@ container.deployVerticle("app.clj", config);
         <section>
           <h2>API Highlights</h2>
           <h3>File System</h3>
-          <pre data-trim content-editable><code>
+          <pre data-trim content-editable><code class="javascript">
 var fs = require('vertx/file_system');
 
 fs.open('/etc/passwd', function(buffer) {
@@ -398,7 +412,7 @@ fs.open('/etc/passwd', function(buffer) {
         <section>
           <h2>API Highlights</h2>
           <h3>HTTP/Net/SSL</h3>
-          <pre data-trim content-editable><code>
+          <pre data-trim content-editable><code class="javascript">
 var http   = require('vertx/http');
 var net    = require('vertx/net');
 var server = http.createHttpServer();
@@ -418,7 +432,7 @@ var client = http.createNetClient().connect(8080, function(socket) {
         <section>
           <h2>API Highlights</h2>
           <h3>Timers</h3>
-          <pre data-trim content-editable><code>
+          <pre data-trim content-editable><code class="javascript">
 var timer = require('vertx/timer');
 var console = require('vertx/console');
 
@@ -439,20 +453,22 @@ timer.cancelTimer(id);
         <section>
           <h2>API Highlights</h2>
           <h3>Event Bus</h3>
-          <pre data-trim content-editable><code>
+          <pre data-trim content-editable><code class="javascript">
 var bus = require('vertx/event_bus');
 var console = require('vertx/console');
 
 bus.registerHandler('app.messages', function(msg, reply) {
+  console.log("Handler got: " + msg);
   reply("Echoing: " + msg);
-});
-
-bus.send('app.messages', 'Hey You!', function(reply) {
-  console.log('Got echo: ' + reply);
 });
 
 // send a message to everyone!
 bus.publish('app.messages', 'Hey Everybody!');
+
+// send a message to a single recipient and get a response
+bus.send('app.messages', 'Hey You!', function(reply) {
+  console.log('Got echo: ' + reply);
+});
           </code></pre>
           </ul>
         </section>
@@ -487,6 +503,11 @@ eb.onopen = function() {
           </code></pre>
           </ul>
         </section>
+
+        <section>
+          <h2>asdf</h2>
+        </section>
+
 
 			</div>
 
