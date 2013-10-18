@@ -26,6 +26,7 @@ var CandidateView = Backbone.View.extend({
   initialize: function() {
     // listen to the model for changes and render
     this.listenTo(this.model, 'change', this.render);
+    this.$el.html(this.template(this.model.attributes));
   },
 
   render: function() {
@@ -39,9 +40,6 @@ var CandidateView = Backbone.View.extend({
       _.each(this.model.get('comments'), function(comment) {
         list.append('<li>'+comment+'</li>');
       });
-    } else {
-      // it's a new model, just render the thing
-      this.$el.html(this.template(this.model.attributes));
     }
     return this;
   },
