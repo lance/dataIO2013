@@ -1,79 +1,69 @@
-var Candidate = Backbone.Model.extend({ 
-});
-
-var Ballot = Backbone.Collection.extend({
-  model: Candidate
-});
-
-var CandidateView = Backbone.View.extend({
-  events: {
-    "click .headshot" : "incrementVotes",
-    "keypress .comment" : "updateOnEnter",
-  },
-
-  template: _.template($('#candidate-template').html()),
-
-  initialize: function() {
-    this.listenTo(this.model, "change", this.render);
-  },
-
-  render: function() {
-    if (this.model.hasChanged("votes")) {
-      // Don't update the entire template for a simple vote
-      // TODO: do the same for comments
-      this.$('.votes').html(this.model.get('votes'));
-    } else {
-      this.$el.html(this.template(this.model.attributes));
-    }
-    return this;
-  },
-
-  incrementVotes: function() {
-    this.model.set({votes: this.model.get('votes') + 1});
-  },
-
-  addComment: function() {
-    var comment = this.$('.comment').val();
-    if (comment) {
-      this.model.get('comments').push(comment);
-      this.model.trigger("change");
-    }
-  },
-
-  updateOnEnter: function(e) {
-    if (e.keyCode ==13) this.addComment();
-  }
-});
-
-var ballot = new Ballot([ 
-  new Candidate({_id: "0", name: "Marcel Marceau", image: "/images/marceau.jpg", votes: 0, comments: []}),
-  new Candidate({_id: "1", name: "Charlie Chaplin", image: "/images/chaplin.jpg", votes: 0, comments: []}),
-  new Candidate({_id: "2", name: "Buster Keaton", image: "/images/keaton.gif", votes: 0, comments: []})
-]);
-
-var eb = new vertx.EventBus("http://localhost:8080/eventbus");
+// Use the vertx event bus to synchronize our models
+var eb = new vertx.EventBus('http://localhost:8080/eventbus');
 
 eb.onopen = function() {
+  var ballot = new Ballot(); 
 
-  ballot.each(function(model) {
+  // Once the event bus is ready, setup our model synchronization
+  Backbone.sync = function(method, model) {
 
-    // Display each candidate with the HTML template
-    var view = new CandidateView({model: model});
-    $("#candidate-list").append(view.render().el);
+    // gets all the records for this collection
+    if (method === 'read') {
 
-    // Create a unique event bus address for each model based on its id
-    var id = 'demo.candidate.' + model.get('_id');
+      // the mongo query for getting all candidates
+      var query = {
+        'action': 'find',
+        'collection': 'candidates',
+        'sort': { name: 1 },
+        'matcher': {}
+      }
 
-    // When a model changes, send that change over the bus
-    model.on('change', function() {
-      // send our changes to the event bus
-      eb.publish(id, model);
-    });
+      // sends a message over the event bus to get records from mongo
+      eb.send(model.url, query, function(msg, replier) {
+        if (msg['status'] == 'ok') { 
 
-    // If changes happen elsewhere, get notified by the bus
-    eb.registerHandler(id, function(msg) {
-      // update the local model with what's on the bus
-      model.set(msg);
-    });
-  });
+          // Iterate over the results, massage, and add to the backbone.js collection
+          _.each(msg['results'], function(record) {
+
+            // Set an id property for backbone
+            record.id = record._id;
+
+            // create the backbone model and add it to the ballot
+            var candidate = new Candidate(record);
+            ballot.add(candidate);
+
+            // If changes happen elsewhere, get notified by the bus
+            eb.registerHandler(candidate.url(), function(msg) {
+              // update the local model with changes sent
+              candidate.set(msg);
+            });
+
+            // Display with the HTML template
+            var view = new CandidateView({model: candidate});
+            $('#candidate-list').append(view.render().el);
+          });
+        } else { alert("There was an error loading the ballot: " + msg['message']); }
+      });
+    } 
+    else if (method === 'update') {
+      // publish the change to the event bus
+      eb.publish(model.url(), model.changedAttributes());
+
+      // update mongo
+      var update = {
+        action: 'update',
+        collection: 'candidates',
+        criteria: {
+          name: model.get('name')
+        },
+        objNew: {
+          $set: model.changedAttributes()
+        }
+      }
+      eb.publish(ballot.url, update);
+    }
+  }
+
+  ballot.fetch();
 }
+

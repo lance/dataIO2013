@@ -11,7 +11,7 @@
 
   <body>
     <div id="container">
-      <h1>Vote For Your Candidate!</h2>
+      <h1>Election Ballot</h1>
       <p>
         Click the face of the candidate you would like to vote for.
         You may also leave a comment.
@@ -21,19 +21,19 @@
 
     </div>
 
-    <!-- This is a simple underscore.js template for a Candidate model -->
+    <!-- This is an underscore.js template for a Candidate model -->
     <script type="text/template" id="candidate-template">
-      <div class="candidate">
-        <h2><%= name %></h2>
-        <div><span class="votes"><%= votes %></span> votes received!</div>
-        <img width="200" height="200" class="headshot" src="<%= image %>"/>
+      <h2><%= name %></h2>
+      <img width="200" height="200" class="headshot" src="<%= image %>"/>
+      <p><span class="votes"><%= votes %></span> votes received!</p>
+      <div>
         <label>
           Leave a Comment
-          <input class="comment" type="text" size="35"/>
+          <input class="comment" type="text" />
         </label>
         <ul class="comments">
-          <% for(idx in comments) { %>
-            <li><%= comments[idx] %></li>
+          <% for (i in comments) { %>
+            <li><%= comments[i] %></li>
           <% } %>
         </ul>
       </div>
@@ -41,11 +41,8 @@
 
     <script src="js/underscore.js"></script>
     <script src="js/backbone.js"></script>
+    <script src="js/models.js"></script>
     <script src="js/ballot.js"></script>
-
-    <script>
-
-    </script>
 
   </body>
 </html>

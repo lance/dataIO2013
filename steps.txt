@@ -1,0 +1,5 @@
+- Turn of networking
+- Set display to 800x600 (or whatever is used for conf)
+- Start /opt/mongo/current/bin/mongod in its own terminal
+- Start /opt/mongo/current/bin/mongo in its own terminal
+- In mongo `use demo`
