@@ -11,7 +11,7 @@ var webConfig = {
 container.deployModule('io.vertx~mod-web-server~2.0.0-final', webConfig);
 
 var mongoConfig = {
-    'address': 'demo.candidates',
+    'address': 'demo.mongo',
     'host': '127.0.0.1',
     'port': 27017,
     'pool_size': 20,

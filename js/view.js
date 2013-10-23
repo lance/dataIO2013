@@ -1,14 +1,3 @@
-// Our backbone.js model
-var Candidate = Backbone.Model.extend({
-});
-
-// The backbone.js collection
-var Ballot = Backbone.Collection.extend({
-  model: Candidate,
-    // The event bus address for mongo
-    url: 'demo.candidates'
-});
-
 // The model's view
 var CandidateView = Backbone.View.extend({
 
