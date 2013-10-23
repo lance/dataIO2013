@@ -23,6 +23,8 @@ var MongoBackbone = function(bus) {
     // Reads a model or collection from mongo using the event bus..
     if (method === 'read') {
 
+      // Send a message to the mongo address on the vertx event bus
+      // requesting a fetch of all the candidate records.
       bus.send(model.url, _constructReadQuery(model, options), function(msg) {
         if (msg['status'] == 'ok') { 
 

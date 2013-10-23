@@ -1,3 +1,17 @@
+/**
+ * This is a simple verticle that can be run on its own.
+ * If you started the demo app in clustered mode:
+ *
+ *     $ vertx run --clustered preso.js
+ *
+ * Then start up this verticle in clustered mode as well.
+ *
+ *     $ vertx run --clustered cluster_node.js
+ *
+ * It will join the cluster and start hacking the election
+ * by using the event bus to send vote updates for the
+ * one true winner - Buster Keaton.
+ */
 var bus       = require('vertx/event_bus');
 var timer     = require('vertx/timer');
 var console   = require('vertx/console');
@@ -11,8 +25,8 @@ var mongoConfig = {
     'db_name': 'demo',
 }
 
+// every seconds add a few to Buster's vote count
 var hackElection = function() {
-  // every seconds add a few votes to Charlie's count
   timer.setPeriodic(1000, fetchAndUpdate);
 }
 
