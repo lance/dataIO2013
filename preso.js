@@ -10,14 +10,6 @@ var webConfig = {
 };
 container.deployModule('io.vertx~mod-web-server~2.0.0-final', webConfig);
 
-var mongoConfig = {
-    'address': 'demo.mongo',
-    'host': '127.0.0.1',
-    'port': 27017,
-    'pool_size': 20,
-    'db_name': 'demo',
-}
-
 var setupDemoData = function() {
   var demoData = [
     { image: "/images/keaton.gif",  name: "Buster Keaton",   votes: 0, comments: [] },
@@ -40,6 +32,13 @@ var setupDemoData = function() {
       });
     }
   });
+}
 
+var mongoConfig = {
+    'address': 'demo.mongo',
+    'host': '127.0.0.1',
+    'port': 27017,
+    'pool_size': 20,
+    'db_name': 'demo',
 }
 container.deployModule('io.vertx~mod-mongo-persistor~2.0.0-final', mongoConfig, setupDemoData);

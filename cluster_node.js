@@ -17,14 +17,6 @@ var timer     = require('vertx/timer');
 var console   = require('vertx/console');
 var container = require('vertx/container');
 
-var mongoConfig = {
-    'address': 'demo.mongo',
-    'host': '127.0.0.1',
-    'port': 27017,
-    'pool_size': 20,
-    'db_name': 'demo',
-}
-
 // every seconds add a few to Buster's vote count
 var hackElection = function() {
   timer.setPeriodic(1000, fetchAndUpdate);
@@ -61,6 +53,14 @@ var updateVotes = function(record) {
   }
   console.log("Changing Buster's votes from " + record.votes + " to " + votes);
   bus.publish('demo.mongo', update);
+}
+
+var mongoConfig = {
+    'address': 'demo.mongo',
+    'host': '127.0.0.1',
+    'port': 27017,
+    'pool_size': 20,
+    'db_name': 'demo',
 }
 
 // get the mongo persistor running and fetch the mongo data

@@ -8,7 +8,7 @@ var bus = new vertx.EventBus('http://localhost:8080/eventbus');
  * security over what's allowed over the bus.
  * @constructor
  */
-var MongoBackbone = function(bus) {
+var MongoBackbone = function(bus, address) {
 
   /**
    * Synchronizes the model based on the method provided.
@@ -25,7 +25,7 @@ var MongoBackbone = function(bus) {
 
       // Send a message to the mongo address on the vertx event bus
       // requesting a fetch of all the candidate records.
-      bus.send(model.url, _constructReadQuery(model, options), function(msg) {
+      bus.send(address, _constructReadQuery(model, options), function(msg) {
         if (msg['status'] == 'ok') { 
 
           // Iterate over the results and add to the collection
@@ -37,14 +37,10 @@ var MongoBackbone = function(bus) {
             model.add(record);
             var modelRecord = model.last();
 
-            // Set the record's urlRoot. This will be used as
-            // the event bus address to send and receive updates
-            // for changes to the model state.
-            modelRecord.urlRoot = model.url;
-
             // Register a handler on the event bus for the new record. 
             // When changes are made to the record elsewhere, our handler 
             // will be called and the model can be updated locally.
+            console.log(['Registering handler for', modelRecord.url()].join(' '));
             bus.registerHandler(modelRecord.url(), function(msg) {
               modelRecord.set(msg);
             });
@@ -72,7 +68,7 @@ var MongoBackbone = function(bus) {
       }
       // publish the changes to the mongodb address
       // on the event bus, ensuring that they are persisted
-      bus.publish(model.urlRoot, update);
+      bus.publish(address, update);
     }
   }
 
@@ -98,15 +94,16 @@ var MongoBackbone = function(bus) {
 
 // The backbone.js collection of candidate records
 var Ballot = Backbone.Collection.extend({
-  // The event bus address for mongo
-  url: 'demo.mongo',
   // The colleciton name in mongo
-  name: 'candidates'
+  name: 'candidates',
+
+  // The backbone.js url
+  url: '/candidates'
 });
 var ballot = new Ballot(); 
 
 bus.onopen = function() {
-  var mongoBackbone = new MongoBackbone(bus);
+  var mongoBackbone = new MongoBackbone(bus, 'demo.mongo');
 
   // Once the event bus is ready, setup our model synchronization
   Backbone.sync = mongoBackbone.sync;
