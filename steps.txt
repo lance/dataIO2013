@@ -1,5 +1,8 @@
-- Turn of networking
-- Set display to 800x600 (or whatever is used for conf)
-- Start /opt/mongo/current/bin/mongod in its own terminal
+- Turn of wifi networking
+- Close all browser windows
+- Quit all apps except Chrome and Terminal
+- Set display to 1024x768 (or whatever is used for conf)
+- Start /opt/mongo/current/bin/mongod --config /etc/mongo.conf in its own terminal
 - Start /opt/mongo/current/bin/mongo in its own terminal
 - In mongo `use demo`
+- In the current directory, `vertx run --clustered preso.js`
